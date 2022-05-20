@@ -14,6 +14,7 @@ function formSubmitHandler(event) {
   const { value: passwordValue } = password;
   if (emailValue === "" || passwordValue === "") {
     alert("All the fields should be completed");
+    return;
   }
   const formObj = new Form(emailValue, passwordValue);
   console.log(formObj);

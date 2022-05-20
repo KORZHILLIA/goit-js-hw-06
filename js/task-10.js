@@ -13,7 +13,7 @@ function destroyBtnClickHandler() {
 
 function createBtnClickHandler() {
   const amountValue = parseInt(amount.value);
-  createBoxes(amountValue);
+  boxesContainer.innerHTML += createBoxes(amountValue);
 }
 
 function createBoxes(amount) {
@@ -23,7 +23,7 @@ function createBoxes(amount) {
     const currentDimension = i * 10 + 30;
     res += `<div class="additional-div" style="width: ${currentDimension}px; height: ${currentDimension}px; background-color: ${currentColor}"></div>`;
   }
-    boxesContainer.insertAdjacentHTML("afterbegin", res);
+  return res;
 }
 
 function getRandomHexColor() {
