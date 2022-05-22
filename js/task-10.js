@@ -1,29 +1,39 @@
-const boxesContainer = document.querySelector('#boxes');
+const boxesContainer = document.querySelector("#boxes");
 const amount = document.querySelector('[type="number"]');
-const createBtn = document.querySelector('[data-create]');
-const destroyBtn = document.querySelector('[data-destroy]')
+const createBtn = document.querySelector("[data-create]");
+const destroyBtn = document.querySelector("[data-destroy]");
 
-createBtn.addEventListener('click', createBtnClickHandler);
-destroyBtn.addEventListener('click', destroyBtnClickHandler);
+let counter = 0;
+
+createBtn.addEventListener("click", createBtnClickHandler);
+destroyBtn.addEventListener("click", destroyBtnClickHandler);
 
 function destroyBtnClickHandler() {
   boxesContainer.innerHTML = "";
   amount.value = 0;
+  counter = 0;
 }
 
 function createBtnClickHandler() {
   const amountValue = parseInt(amount.value);
   boxesContainer.innerHTML += createBoxes(amountValue);
+  counter += amountValue + 1;
 }
 
 function createBoxes(amount) {
-  let res = '';
-  for (let i = 0; i < amount; i += 1) {
-    const currentColor = getRandomHexColor();
-    const currentDimension = i * 10 + 30;
-    res += `<div class="additional-div" style="width: ${currentDimension}px; height: ${currentDimension}px; background-color: ${currentColor}"></div>`;
-  }
-  return res;
+  const arr = new Array(amount);
+  arr.fill("");
+  const markup = arr
+    .map((el, idx) => {
+      const currentColor = getRandomHexColor();
+      const currentDimension = (idx + counter) * 10 + 30;
+      return (
+        el +
+        `<div class="additional-div" style="width: ${currentDimension}px; height: ${currentDimension}px; background-color: ${currentColor}"></div>`
+      );
+    })
+    .join("");
+  return markup;
 }
 
 function getRandomHexColor() {
